@@ -36,11 +36,26 @@ alert(e.innerHTML);
 e.innerHTML = 'dunno';*/
 
 
+function myTimer() {
+	var d=new Date();
+	var t=d.toLocaleTimeString();
+	document.getElementById("demo").innerHTML=t;
+}
+
+
+
 var Doom = (function(options) {
 	var id = options.id || 'doom',
 		test = options.test || 'test';
-		
+
+	function countdown() {
+		setInterval(function(){myTimer()},1000); // why does this need to be within the function, but myTimer() does not?
+	}		
+
+
   function begin() {
+  	// setInterval(function(){myTimer()},1000); // why doesn't this work?
+		countdown(); // called here
 		var e = document.getElementById(id);
 		e.innerHTML = test;
   }
@@ -48,6 +63,9 @@ var Doom = (function(options) {
     begin: begin
   };
 });
+
+
+
 
 function silly() {
   document.title = 'The Future Home of Haggis Rugby Football Club - Launching in ' + counter(dateDiff(new Date(), new Date(1347861600*1000)));
