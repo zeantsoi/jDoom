@@ -8,19 +8,28 @@
 
 <body>
 
-<div id="doom">poop</div>
+<div id="micro">poop</div>
 Whatup bitch
 
 <div id="demo"></div>
+
+<span id="days"></span> days<br />
+<span id="hours"></span> hours<br />
+<span id="mins"></span> mins<br />
+<span id="secs"></span> secs<br />
+
 <script type="text/javascript" src="jdoom.js"></script>
 
 <script type="text/javascript">
 	var countdown = Doom({
-		id: 'doom',
-		test: 'foo'
+		endDate: '08/24/2013',
+		time: '20:55:44',
+		timezone: 'MDT',
+		addZero: true,
 	});
 	countdown.begin();
-	
+
+
 
 </script>
 </body>

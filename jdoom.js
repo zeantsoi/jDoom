@@ -35,40 +35,84 @@ Example Usage
 alert(e.innerHTML);
 e.innerHTML = 'dunno';*/
 
+function detectTZ() {
+	var now = new Date().toString();
+	var timezone = now.indexOf('(') > -1 ?
+	now.match(/\([^\)]+\)/)[0].match(/[A-Z]/g).join('') :
+	now.match(/[A-Z]{3,4}/)[0];
+	if (timezone == "GMT" && /(GMT\W*\d{4})/.test(now)) timezone = RegExp.$1;
 
-function myTimer() {
-	var d=new Date();
-	var t=d.toLocaleTimeString();
-	document.getElementById("demo").innerHTML=t;
+	return timezone;
 }
 
+function getTZ(timezone) {
+	return (timezone == 'detect' ? detectTZ() : timezone);
+}
 
+var id;
+var addZero;
+var formattedEndDate;
+var diff;
+
+var days;
+var hours;
+var mins;
+var secs;
+
+function init(options) {
+	var endDate = options.endDate || null;
+	var time = options.time || '00:00:00';
+	var timezone = getTZ(options.timezone) || 'GMT';
+
+	days = options.days || 'days';
+	hours = options.hours || 'hours';
+	mins = options.mins || 'mins';
+	secs = options.secs || 'secs';
+
+	id = options.id || 'doom';
+  addZero = (options.addZero == false) ? false : true;
+
+	formattedEndDate = new Date(Date.parse([endDate, time, timezone].join(' ')));
+
+}
+
+function count() {
+		var diff = formattedEndDate - (new Date());
+		refresh(timeParts(diff));
+		return;
+}
+
+function refresh(parts) {
+	var partsArray = ['days', 'hours', 'mins', 'secs'];
+	for (var i = 0; i < partsArray.length; i++) {
+		var element = document.getElementById(partsArray[i]);
+		if (element != null) {
+			 element.innerHTML = parts[partsArray[i]+'Part'];
+		}
+	}
+}
+	
 
 var Doom = (function(options) {
-	var id = options.id || 'doom',
-		test = options.test || 'test';
-
-	function countdown() {
-		setInterval(function(){myTimer()},1000); // why does this need to be within the function, but myTimer() does not?
-	}		
-
-
+	
+	init(options);
+	
   function begin() {
-  	// setInterval(function(){myTimer()},1000); // why doesn't this work?
-		countdown(); // called here
-		var e = document.getElementById(id);
-		e.innerHTML = test;
+  	setInterval(count, 1000);
   }
+
   return {
     begin: begin
   };
 });
 
-
-
-
-function silly() {
-  document.title = 'The Future Home of Haggis Rugby Football Club - Launching in ' + counter(dateDiff(new Date(), new Date(1347861600*1000)));
+function timeParts(diff) {
+    return isNaN( diff ) ? NaN : {
+        secsPart  : formatZero(Math.floor( diff /     1000 %   60 )),
+        minsPart  : formatZero(Math.floor( diff /    60000 %   60 )),
+        hoursPart  : formatZero(Math.floor( diff /  3600000 %   24 )),
+        daysPart  : formatZero(Math.floor( diff / 86400000        ))
+    };
 }
 
 function dateDiff( str1, str2 ) {
@@ -83,11 +127,17 @@ function dateDiff( str1, str2 ) {
     };
 }
 
+
+
 function formatZero(number) {
-  return (number.toString().length == 1) ? ('0' + number) : number;
+	if (addZero) {
+  	return (number.toString().length == 1) ? ('0' + number) : number;
+  } else {
+  	return number;
+  }
 }
 
 function counter(diff) {
-  return diff['d'] + ':' + diff['h'] + ':' + diff['m'] + ':' + diff['s']
+  return diff['d'] + ' ' + diff['h'] + ':' + diff['m'] + ':' + diff['s']
 }
-var diff = dateDiff(new Date(), new Date(1347861600*1000));
+//var diff = dateDiff(new Date(), new Date(1347861600*1000));
