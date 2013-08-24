@@ -49,6 +49,8 @@ function getTZ(timezone) {
 	return (timezone == 'detect' ? detectTZ() : timezone);
 }
 
+var count; // NEEDS TO BE HERE FOR SET/CLEAR INTERVAL
+
 var id;
 var addZero;
 var formattedEndDate;
@@ -71,34 +73,46 @@ function init(options) {
 
 	id = options.id || 'doom';
   addZero = (options.addZero == false) ? false : true;
+  
+  callback = options.callback;
 
 	formattedEndDate = new Date(Date.parse([endDate, time, timezone].join(' ')));
 
 }
 
-function count() {
+function countDown() {
 		var diff = formattedEndDate - (new Date());
-		refresh(timeParts(diff));
+
+		refresh(diff);
 		return;
 }
 
-function refresh(parts) {
+function refresh(diff) {
+	var timeParts = getTimeParts(diff);
+
+	if ((diff < 1000) && callback) {
+		runCallback();
+	}
 	var partsArray = ['days', 'hours', 'mins', 'secs'];
 	for (var i = 0; i < partsArray.length; i++) {
 		var element = document.getElementById(partsArray[i]);
 		if (element != null) {
-			 element.innerHTML = parts[partsArray[i]+'Part'];
+			 element.innerHTML = timeParts[partsArray[i]+'Part'];
 		}
 	}
 }
-	
+
+function runCallback() {
+	clearInterval(counting);
+	callback();
+}
 
 var Doom = (function(options) {
 	
 	init(options);
 	
   function begin() {
-  	setInterval(count, 1000);
+  	counting = setInterval(countDown, 1000);
   }
 
   return {
@@ -106,7 +120,7 @@ var Doom = (function(options) {
   };
 });
 
-function timeParts(diff) {
+function getTimeParts(diff) {
     return isNaN( diff ) ? NaN : {
         secsPart  : formatZero(Math.floor( diff /     1000 %   60 )),
         minsPart  : formatZero(Math.floor( diff /    60000 %   60 )),
