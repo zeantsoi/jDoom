@@ -61,6 +61,7 @@ var Doom = (function (options) {
     var targetDate = options.targetDate || null;
     var targetTime = options.targetTime || '00:00:00';
     var targetTimezone = getTimezone(options.targetTimezone) || 'GMT';
+    alert(targetTimezone);
 
     days = (options.ids) ? (options.ids.days || 'days') : 'days';
     hours = (options.ids) ? (options.ids.hours || 'hours') : 'hours';
