@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>jDoom Examples</title>
+</head>
+
+<body>
+
+	<h1>jDoom Examples</h1>
+
+	<h2>Default (no options)</h2>
+	<span id="days"></span> days 
+	<span id="hours"></span> hours 
+	<span id="mins"></span> mins 
+	<span id="secs"></span> secs
+
+	<h2>Bi-directional (no callback)</h2>
+	<p>
+	<span id="days_bidirectional"></span> days 
+	<span id="hours_bidirectional"></span> hours 
+	<span id="mins_bidirectional"></span> mins 
+	<span id="secs_bidirectional"></span> secs
+
+	<h2>Bi-directional (with callback)</h2>
+	<p>
+	<span id="days_bidirectional_callback"></span> days 
+	<span id="hours_bidirectional_callback"></span> hours 
+	<span id="mins_bidirectional_callback"></span> mins 
+	<span id="secs_bidirectional_callback"></span> secs <span id="bidirectional_callback_message"></span>
+
+	<h2>Directional (with callback and extra zeroes removed)</h2>
+	<span id="days_callback_no_zero"></span> days 
+	<span id="hours_callback_no_zero"></span> hours 
+	<span id="mins_callback_no_zero"></span> mins 
+	<span id="secs_callback_no_zero"></span> secs <span id="directional_callback_message"></span>
+
+	<script type="text/javascript" src="js/jdoom.min.js"></script>
+	<script type="text/javascript">
+		/**********************
+		* Configure examples here
+		**********************/
+		var secsToZero = 5;
+		
+		/**********************
+		* Get current time minus secsToZero
+		**********************/
+		var date = new Date();
+
+		var secsToNow = date.getTime() / 1000 + secsToZero;
+		var hours = parseInt(secsToNow / 3600) % 24;
+		var mins = parseInt(secsToNow / 60) % 60;
+		var secs = Math.floor(secsToNow % 60);
+		var dateStr = [date.getMonth() + 1, date.getDate() + 1, date.getFullYear()].join('/');
+		var timeStr = [hours, mins, secs].join(':');
+
+		/**********************
+		* Default examples
+		**********************/
+
+		/* Default (no configuration) */
+		var noOptions = Doom({
+			targetDate: dateStr,
+			targetTime: timeStr,
+		});
+		noOptions.doom();
+
+		/* Bidirectional (no callback) */
+		var biDirectional = Doom({
+			targetDate: dateStr,
+			targetTime: timeStr,
+			biDirectional: true,
+			ids: {
+				days: 'days_bidirectional',
+				hours: 'hours_bidirectional',
+				mins: 'mins_bidirectional',
+				secs: 'secs_bidirectional',
+			},
+		});
+		biDirectional.doom();
+
+		/* Bidirectional (with callback) */
+		var biDirectionalCallback = Doom({
+			targetDate: dateStr,
+			targetTime: timeStr,
+			biDirectional: true,
+			ids: {
+				days: 'days_bidirectional_callback',
+				hours: 'hours_bidirectional_callback',
+				mins: 'mins_bidirectional_callback',
+				secs: 'secs_bidirectional_callback',
+			},
+			callback: function() {
+				document.getElementById('bidirectional_callback_message').innerHTML = '<strong>Callback executed at zero count!</strong>';
+			}
+		});
+		biDirectionalCallback.doom();
+
+		/* Directional (with callback and extra zeroes removed) */
+		var directionalCallbackNoZeroes = Doom({
+			targetDate: dateStr,
+			targetTime: timeStr,
+			addZero: false,
+			ids: {
+				days: 'days_callback_no_zero',
+				hours: 'hours_callback_no_zero',
+				mins: 'mins_callback_no_zero',
+				secs: 'secs_callback_no_zero',
+			},
+			callback: function() {
+				document.getElementById('directional_callback_message').innerHTML = '<strong>Callback executed at zero count!</strong>';
+			}
+		});
+		directionalCallbackNoZeroes.doom();
+
+	</script>
+</body>
+</html>
+
