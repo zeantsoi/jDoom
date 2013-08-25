@@ -3,6 +3,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>jDoom Examples</title>
+
+	<style type="text/css">
+		h2 {
+			margin-top: 20px;
+			margin-bottom: -10px;
+		}
+		p {
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 
 <body>
@@ -10,41 +20,46 @@
 	<h1>jDoom Examples</h1>
 
 	<h2>Default (no options)</h2>
+	<p><em>Counts down to zero, then stops.</em></p>
 	<span id="days"></span> days 
 	<span id="hours"></span> hours 
 	<span id="mins"></span> mins 
 	<span id="secs"></span> secs
 
 	<h2>Bi-directional (no callback)</h2>
-	<p>
+	<p><em>Counts down to zero, then counts up.</em></p>
 	<span id="days_bidirectional"></span> days 
 	<span id="hours_bidirectional"></span> hours 
 	<span id="mins_bidirectional"></span> mins 
 	<span id="secs_bidirectional"></span> secs
 
 	<h2>Bi-directional (with callback)</h2>
-	<p>
+	<p><em>Counts down to zero, runs a callback function, then counts up.</em></p>
 	<span id="days_bidirectional_callback"></span> days 
 	<span id="hours_bidirectional_callback"></span> hours 
 	<span id="mins_bidirectional_callback"></span> mins 
 	<span id="secs_bidirectional_callback"></span> secs <span id="bidirectional_callback_message"></span>
 
 	<h2>Directional (with callback and extra zeroes removed)</h2>
+	<p><em>Counts down to zero, runs a callback function, then stops. Preceding zeroes are removed.</em></p>
 	<span id="days_callback_no_zero"></span> days 
 	<span id="hours_callback_no_zero"></span> hours 
 	<span id="mins_callback_no_zero"></span> mins 
 	<span id="secs_callback_no_zero"></span> secs <span id="directional_callback_message"></span>
 
+	<p><a href="">Reset Timers</a></p>
+
 	<script type="text/javascript" src="js/jdoom.min.js"></script>
 	<script type="text/javascript">
-		/**********************
+
+		/********************************************
 		* Configure examples here
-		**********************/
+		********************************************/
 		var secsToZero = 5;
 		
-		/**********************
+		/********************************************
 		* Get current time minus secsToZero
-		**********************/
+		********************************************/
 		var date = new Date();
 
 		var secsToNow = date.getTime() / 1000 + secsToZero;
@@ -54,9 +69,9 @@
 		var dateStr = [date.getMonth() + 1, date.getDate(), date.getFullYear()].join('/');
 		var timeStr = [hours, mins, secs].join(':');
 
-		/**********************
+		/********************************************
 		* Default examples
-		**********************/
+		********************************************/
 
 		/* Default (no configuration) */
 		var noOptions = Doom({

@@ -96,6 +96,11 @@ var Doom = (function (options) {
     refresh(diff);
     return;
   }
+
+  /********************************************
+  * FUCKING CREATE NEW CURRENT TIME WITH TIMEZONE THAT IS PASSED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  ********************************************/
+
   function refresh(diff) {
     var timeParts = getTimeParts(diff);
     var timeVars = [days, hours, mins, secs];
