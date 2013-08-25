@@ -35,7 +35,7 @@
 	<span id="mins_callback_no_zero"></span> mins 
 	<span id="secs_callback_no_zero"></span> secs <span id="directional_callback_message"></span>
 
-	<script type="text/javascript" src="js/jdoom.min.js"></script>
+	<script type="text/javascript" src="../source/jdoom.js"></script>
 	<script type="text/javascript">
 		/**********************
 		* Configure examples here
@@ -51,7 +51,7 @@
 		var hours = parseInt(secsToNow / 3600) % 24;
 		var mins = parseInt(secsToNow / 60) % 60;
 		var secs = Math.floor(secsToNow % 60);
-		var dateStr = [date.getMonth() + 1, date.getDate() + 1, date.getFullYear()].join('/');
+		var dateStr = [date.getMonth() + 1, date.getDate(), date.getFullYear()].join('/');
 		var timeStr = [hours, mins, secs].join(':');
 
 		/**********************
@@ -60,7 +60,8 @@
 
 		/* Default (no configuration) */
 		var noOptions = Doom({
-
+			targetDate: dateStr,
+			targetTime: timeStr,
 		});
 		noOptions.doom();
 

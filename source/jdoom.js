@@ -57,6 +57,7 @@ var Doom = (function (options) {
   * Initialize local vars
   ********************************************/
   function init() {
+
     var targetDate = options.targetDate || null;
     var targetTime = options.targetTime || '00:00:00';
     var targetTimezone = getTimezone(options.targetTimezone) || 'GMT';
@@ -65,17 +66,6 @@ var Doom = (function (options) {
     hours = (options.ids) ? (options.ids.hours || 'hours') : 'hours';
     mins = (options.ids) ? (options.ids.mins || 'mins') : 'mins';
     secs = (options.ids) ? (options.ids.secs || 'secs') : 'secs';
-    // if (options.ids) {
-    //  days = (options.ids.days || 'days');
-    //  hours = (options.ids.hours || 'hours');
-    //  mins = (options.ids.mins || 'mins');
-    //  secs = (options.ids.secs || 'secs');
-    // } else {
-    //  days = 'days';
-    //  hours = 'hours';
-    //  mins = 'mins';
-    //  secs = 'secs';
-    // }
 
     addZero = (options.addZero === false) ? false : true;
     callback = options.callback || (function(){});
@@ -169,5 +159,4 @@ var Doom = (function (options) {
   return {
     doom: doom
   };
-
-});h(/[A-Z]/g).join(""):a.match(/[A-Z]{3,4}/)[0];"GMT"===b&&/(GMT\W*\d{4})/.test(a)&&(b=RegExp.$1);return b}var e,r,n,f,h,k,l,m,p,q;(function(){var c=a.targetDate||null,b=a.targetTime||"00:00:00",d=("detect"===a.targetTimezone?s():a.targetTimezone)||"GMT";h=a.ids?a.ids.days||"days":"days";k=a.ids?a.ids.hours||"hours":"hours";l=a.ids?a.ids.mins||"mins":"mins";m=a.ids?a.ids.secs||"secs":"secs";e=!1===a.addZero?!1:!0;r=a.callback||function(){};n=a.biDirectional||!1;f=new Date(Date.parse([c, b,d].join(" ")));q=!1})();return{doom:function(){d();p=setInterval(d,1E3)}}};
+});
