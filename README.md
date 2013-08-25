@@ -13,7 +13,7 @@ jDoom is many things – here are a few things it is:
 
 jDoom is the Javascript timer you've always wanted.
 
-jDoom is pure destruction.
+jDoom is __pure destruction__.
 
 ## Getting Started
 
