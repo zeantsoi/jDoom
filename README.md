@@ -38,7 +38,7 @@ Then, to display the countdown timer, ensure that the following DOM elements are
 
 The resulting Javascript injected markup will display the current time remaining to the `targetDate` in `dd : hh : mm : ss` format, updated once per second.
 
-** Examples
+## Examples
 
 ANY ERROR WILL RESULT IN _UNDEFINED_ BEING RETURNED.
 
