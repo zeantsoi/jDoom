@@ -38,6 +38,8 @@ var Doom = (function (options) {
   var callback;
   var biDirectional;
   var targetDateStr;
+  var targetTimezone;
+  var adjustedOffset;
 
   /********************************************
   * Local vars – DOM identifiers
@@ -60,8 +62,9 @@ var Doom = (function (options) {
 
     var targetDate = options.targetDate || null;
     var targetTime = options.targetTime || '00:00:00';
-    var targetTimezone = getTimezone(options.targetTimezone) || 'GMT';
-    alert(targetTimezone);
+
+    // targetTimezone = getTimezone(options.targetTimezone) || 'GMT';
+    adjustedOffset = adjustOffset(options.utcOffset || null);
 
     days = (options.ids) ? (options.ids.days || 'days') : 'days';
     hours = (options.ids) ? (options.ids.hours || 'hours') : 'hours';
@@ -71,7 +74,7 @@ var Doom = (function (options) {
     addZero = (options.addZero === false) ? false : true;
     callback = options.callback || (function(){});
     biDirectional = options.biDirectional || false;
-    targetDateStr = new Date(Date.parse([targetDate, targetTime, targetTimezone].join(' ')));
+    targetDateStr = strToDate([targetDate, targetTime, adjustedOffset].join(' '));
 
     calledBack = false;
   }
@@ -90,7 +93,7 @@ var Doom = (function (options) {
   ********************************************/
   function currentCount() {
     var diff;
-    var currentTime = new Date();
+    var currentTime = strToDate(formatDateToStr(new Date()));
     /* If current time less than target time, the count down; otherwise, count up */
     diff = (currentTime < targetDateStr) ? targetDateStr - currentTime : currentTime - targetDateStr;
     refresh(diff);
@@ -98,7 +101,7 @@ var Doom = (function (options) {
   }
 
   /********************************************
-  * FUCKING CREATE NEW CURRENT TIME WITH TIMEZONE THAT IS PASSED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  * Change events
   ********************************************/
 
   function refresh(diff) {
@@ -120,6 +123,7 @@ var Doom = (function (options) {
     if (!biDirectional) { clearInterval(interval); }
     if (!calledBack) {
       callback();
+      calledBack = true;
     }
   }
 
@@ -138,20 +142,42 @@ var Doom = (function (options) {
     if (!addZero) { return number; }
     return (number.toString().length === 1) ? ('0' + number) : number;
   }
+  function formatDateToStr(date) {
+    var secsToNow = date.getTime() / 1000;
+    var hours = parseInt(secsToNow / 3600) % 24;
+    var mins = parseInt(secsToNow / 60) % 60;
+    var secs = Math.floor(secsToNow % 60);
+    var dateStr = [date.getMonth() + 1, date.getDate(), date.getFullYear()].join('/');
+    var timeStr = [hours, mins, secs].join(':');
+    return [dateStr, timeStr].join(' ');
+  }
+  function strToDate(dateStr) {
+    return (new Date(Date.parse(dateStr)));
+  }
 
   /********************************************
   * Timezone functions
   ********************************************/
-  function getTimezone(timezone) {
-    return (timezone === 'detect' ? detectTimezone() : timezone);
-  }
-  function detectTimezone() {
-    var now = new Date().toString();
-    var timezone = now.indexOf('(') > -1 ?
-      now.match(/\([^\)]+\)/)[0].match(/[A-Z]/g).join('') :
-      now.match(/[A-Z]{3,4}/)[0];
-    if (timezone === "GMT" && /(GMT\W*\d{4})/.test(now)) { timezone = RegExp.$1; }
-    return timezone;
+  function adjustOffset(utcOffset) {
+    var adjustedOffset;
+    if (utcOffset) {
+      var offsetDirection = utcOffset.charAt(0);
+      var offsetTime = utcOffset.substring(1).split(':');
+      var offsetSecsAbs = (+offsetTime[0]) * 60 * 60 + (+offsetTime[1]) * 60;
+
+      var localOffset = -Math.abs(date.getTimezoneOffset() * 60);
+
+      var adjustedSecs = (localOffset + eval(offsetDirection + offsetSecsAbs));
+
+      var hours = adjustedSecs / (60 * 60);
+      var mins = Math.abs(adjustedSecs / 60 % 60);
+
+      adjustedOffset = [hours, mins].join(':');
+
+    } else {
+      adjustedOffset = null;
+    }
+    return adjustedOffset;
   }
 
   /********************************************

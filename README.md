@@ -10,9 +10,9 @@ jDoom is many things – here are a few things it is:
 4. It is focused on human readability/usability
 5. It is built for speed, simplicity, and extendability
 
-jDoom is the Javascript timer you deserve, ___and___ the one you need right now.
+jDoom is the Javascript timer you deserve, __and__ the one you need right now.
 
-__jDoom is pure destruction__.
+jDoom is __pure destruction__.
 
 ## Getting Started
 
@@ -39,5 +39,7 @@ Then, to display the countdown timer, ensure that the following DOM elements are
 The resulting Javascript injected markup will display the current time remaining to the `targetDate` in `dd : hh : mm : ss` format, updated once per second.
 
 ** Examples
+
+ANY ERROR WILL RESULT IN _UNDEFINED_ BEING RETURNED.
 
 [Found here.](http://zeantsoi.com/jdoom)
