@@ -24,7 +24,7 @@ Simply add a `<script>` tag referencing `jdoom.js` or `jdoom.min.js` to your mar
 
 ### Basic implementation
 
-jDoom requires minimal configuration to get a basic implementation running – it requires only that a date (formatted as `mm/dd/yyyy`) is specified. Simply pass a date to an instance of the `Doom` function, assign it to a variable, and run the `doom` method on the variable:
+jDoom requires minimal configuration to get a basic implementation running – it requires only that a date (formatted as `mm/dd/yyyy`) is specified. Simply pass a date string to an instance of the `Doom` function, assign it to a variable, and run the `doom` method on the variable:
 
     var counter = Doom({
       targetDate: '04/05/2063'

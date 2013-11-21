@@ -19,6 +19,8 @@
 
 	<h1>jDoom Examples</h1>
 
+	<p><a href="">Reset Timers</a></p>
+
 	<h2>Default (no options)</h2>
 	<p><em>Counts down to zero, then stops.</em></p>
 	<span id="days"></span> days 
@@ -47,8 +49,8 @@
 	<span id="mins_callback_no_zero"></span> mins 
 	<span id="secs_callback_no_zero"></span> secs <span id="directional_callback_message"></span>
 
-	<h2>Directional (with time zone)</h2>
-	<p><em>Counts down to midnight two days from today* <strong>in this browser's current time zone</strong>.</em></p>
+	<h2>Directional (with time zone offset)</h2>
+	<p><em>Counts down to midnight two days from today <strong>in this browser's current time zone</strong>.</em></p>
 	<span id="days_local"></span> days 
 	<span id="hours_local"></span> hours 
 	<span id="mins_local"></span> mins 
@@ -66,9 +68,7 @@
 	<span id="mins_gmt"></span> mins 
 	<span id="secs_gmt"></span> secs
 
-	<h5><em>* Relative to browser's current date</em></h5>
-
-	<p><a href="">Reset Timers</a></p>
+	<p><small><em>* Relative to browser's current date</em></small></p>
 
 	<script type="text/javascript" src="../source/jdoom.js"></script>
 	<script type="text/javascript">
@@ -95,7 +95,7 @@
 		var midnightStr = '00:00:00';
 
 		/********************************************
-		* Demo specific variables 
+		* Timezone specific variables 
 		********************************************/
 		var localDate = new Date();
 		var localOffsetInMins = date.getTimezoneOffset();
@@ -118,8 +118,7 @@
 		var localDateWithOffsetStr = [localDateWithOffset.getMonth() + 1, localDateWithOffset.getDate(), localDateWithOffset.getFullYear()].join('/');
 		var localOffsetHour = eval(-(localOffsetInMins / (60)));
 
-		if (localOffsetHour > 0)
-			localOffsetHour = '+' + localOffsetHour;
+		if (localOffsetHour > 0) localOffsetHour = '+' + localOffsetHour;
 
 		var localUTCOffset = [localOffsetHour, (Math.abs(localOffsetInMins % 60))].join(':');
 
@@ -209,7 +208,7 @@
 		});
 		pst.doom();
 
-		/* Default (no configuration) */
+		/* Directional (with time zone offset) */
 		var gmt = Doom({
 			targetDate: gmtDateWithOffsetStr,
 			targetTime: midnightStr,
