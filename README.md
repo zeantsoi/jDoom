@@ -18,7 +18,7 @@ jDoom is __pure destruction__.
 
 ### Installation
 
-jDoom is written _purely in Javascript_. Therefore, it does not require any libraries, frameworks, or other dependencies in order to function. Conversely, jDoom doesn't care what other dependencies are installed. It is completely unobtrusive, self-encapsulated, and deliberately designed to bear zero-to-minimal impact on other libraries.
+jDoom is written in ___pure__ Javascript_. Therefore, it does not require any libraries, frameworks, or other dependencies in order to function. Conversely, jDoom doesn't care what other dependencies are installed. It is completely unobtrusive, self-encapsulated, and deliberately designed to bear zero-to-minimal impact on other libraries.
 
 Simply add a `<script>` tag referencing `jdoom.js` or `jdoom.min.js` to your markup, and you're ready to go.
 
