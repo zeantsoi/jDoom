@@ -167,4 +167,4 @@ Please contact the developer with any questions or suggestions. Forking and merg
 
 jDoom is licensed under the MIT License.
 
-(c) 2013 by Zean Tsoi
+&copy; 2013 by Zean Tsoi
