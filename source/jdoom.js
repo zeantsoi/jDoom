@@ -38,7 +38,6 @@ var Doom = (function (options) {
   var callback;
   var biDirectional;
   var targetDateStr;
-  var targetTimezone;
   var adjustedOffset;
 
   /********************************************
@@ -63,7 +62,6 @@ var Doom = (function (options) {
     var targetDate = options.targetDate || null;
     var targetTime = options.targetTime || '00:00:00';
 
-    // targetTimezone = getTimezone(options.targetTimezone) || 'GMT';
     adjustedOffset = adjustOffset(options.utcOffset || null);
 
     days = (options.ids) ? (options.ids.days || 'days') : 'days';

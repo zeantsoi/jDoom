@@ -70,9 +70,9 @@
 
 	<p><small><em>* Relative to browser's current date</em></small></p>
 
-	<script type="text/javascript" src="../source/jdoom.js"></script>
+	<script type="text/javascript" src="./js/jdoom.min.js"></script>
 	<script type="text/javascript">
-		
+
 		/********************************************
 		* Configure examples here
 		********************************************/
@@ -181,7 +181,7 @@
 		});
 		directionalCallbackNoZeroes.doom();
 
-		/* Default (no configuration) */
+		/* Directional (with local time zone offset) */
 		var local = Doom({
 			targetDate: localDateWithOffsetStr,
 			targetTime: midnightStr,
@@ -195,6 +195,7 @@
 		});
 		local.doom();
 
+		/* Directional (with PST time zone offset) */
 		var pst = Doom({
 			targetDate: pstDateWithOffsetStr,
 			targetTime: midnightStr,
@@ -208,7 +209,7 @@
 		});
 		pst.doom();
 
-		/* Directional (with time zone offset) */
+		/* Directional (with GMT time zone offset) */
 		var gmt = Doom({
 			targetDate: gmtDateWithOffsetStr,
 			targetTime: midnightStr,
