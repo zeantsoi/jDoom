@@ -159,6 +159,7 @@ var Doom = (function (options) {
   function adjustOffset(utcOffset) {
     var adjustedOffset;
     if (utcOffset) {
+      var date = new Date():
       var offsetDirection = utcOffset.charAt(0);
       var offsetTime = utcOffset.substring(1).split(':');
       var offsetSecsAbs = (+offsetTime[0]) * 60 * 60 + (+offsetTime[1]) * 60;
