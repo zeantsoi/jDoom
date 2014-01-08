@@ -72,7 +72,7 @@
 
 	<p>The source code for jDoom can be <a href="https://github.com/zeantsoi/jDoom">found on Github</a>.</p>
 
-	<script type="text/javascript" src="./js/jdoom.min.js"></script>
+	<script type="text/javascript" src="../source/Doom.js"></script>
 	<script type="text/javascript">
 
 		/********************************************
@@ -129,14 +129,13 @@
 		********************************************/
 
 		/* Default (no configuration) */
-		var noOptions = Doom({
+		var noOptions = new Doom({
 			targetDate: dateStr,
 			targetTime: timeStr,
 		});
-		noOptions.doom();
 
 		/* Bidirectional (no callback) */
-		var biDirectional = Doom({
+		var biDirectional = new Doom({
 			targetDate: dateStr,
 			targetTime: timeStr,
 			biDirectional: true,
@@ -147,10 +146,9 @@
 				secs: 'secs_bidirectional',
 			},
 		});
-		biDirectional.doom();
 
 		/* Bidirectional (with callback) */
-		var biDirectionalCallback = Doom({
+		var biDirectionalCallback = new Doom({
 			targetDate: dateStr,
 			targetTime: timeStr,
 			biDirectional: true,
@@ -164,10 +162,9 @@
 				document.getElementById('bidirectional_callback_message').innerHTML = '<strong>Callback executed at zero count!</strong>';
 			}
 		});
-		biDirectionalCallback.doom();
 
 		/* Directional (with callback and extra zeroes removed) */
-		var directionalCallbackNoZeroes = Doom({
+		var directionalCallbackNoZeroes = new Doom({
 			targetDate: dateStr,
 			targetTime: timeStr,
 			addZero: false,
@@ -181,10 +178,9 @@
 				document.getElementById('directional_callback_message').innerHTML = '<strong>Callback executed at zero count!</strong>';
 			}
 		});
-		directionalCallbackNoZeroes.doom();
 
 		/* Directional (with local time zone offset) */
-		var local = Doom({
+		var local = new Doom({
 			targetDate: localDateWithOffsetStr,
 			targetTime: midnightStr,
 			utcOffset: localUTCOffset,
@@ -195,10 +191,9 @@
 				secs: 'secs_local',
 			},
 		});
-		local.doom();
 
 		/* Directional (with PST time zone offset) */
-		var pst = Doom({
+		var pst = new Doom({
 			targetDate: pstDateWithOffsetStr,
 			targetTime: midnightStr,
 			utcOffset: '-8:00',
@@ -209,10 +204,9 @@
 				secs: 'secs_pst',
 			},
 		});
-		pst.doom();
 
 		/* Directional (with GMT time zone offset) */
-		var gmt = Doom({
+		var gmt = new Doom({
 			targetDate: gmtDateWithOffsetStr,
 			targetTime: midnightStr,
 			utcOffset: '+00:00',
@@ -223,8 +217,6 @@
 				secs: 'secs_gmt',
 			},
 		});
-		gmt.doom();
-
 	</script>
 </body>
 </html>
